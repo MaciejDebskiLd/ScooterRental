@@ -3,7 +3,7 @@ package com.example.scooterrental.controller;
 import com.example.scooterrental.api.BasicResponse;
 import com.example.scooterrental.api.request.CreateUserAccountRequest;
 import com.example.scooterrental.api.response.CreateUserAccountResponse;
-import com.example.scooterrental.service.impl.UserAccountServiceImpl;
+import com.example.scooterrental.service.UserAccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("user-account")
 public class UserAccountController {
 
-    public UserAccountServiceImpl userAccountServiceImpl;
+    public UserAccountService userAccountService;
 
-    public UserAccountController(UserAccountServiceImpl userAccountServiceImpl) {
-        this.userAccountServiceImpl = userAccountServiceImpl;
+    public UserAccountController(UserAccountService userAccountService) {
+        this.userAccountService = userAccountService;
     }
 
     @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<CreateUserAccountResponse> createUserAccount(
             @RequestBody CreateUserAccountRequest request
     ){
-        return userAccountServiceImpl.createUserAccount(request);
+        return userAccountService.createUserAccount(request);
     }
 
     @PutMapping(value = "/{accountId}/recharge", produces = "application/json")
@@ -29,6 +29,6 @@ public class UserAccountController {
             @PathVariable Long accountId,
             @RequestParam String amount
     ){
-        return userAccountServiceImpl.rechargeUserAccount(accountId, amount);
+        return userAccountService.rechargeUserAccount(accountId, amount);
     }
 }
