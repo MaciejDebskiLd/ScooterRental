@@ -22,7 +22,7 @@ public class Scooter {
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_account_id", referencedColumnName = "id")//id - pod jaką nazwą występuje w userAccount
     private UserAccount userAccount;
 
     public Long getId() {
