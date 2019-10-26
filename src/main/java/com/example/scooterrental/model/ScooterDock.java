@@ -12,7 +12,7 @@ public class ScooterDock {
     private String dockName;
     private Integer availablePlace;
 
-    @OneToMany(mappedBy = "scooterDock", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "scooterDock", cascade = CascadeType.ALL)//mappedBy pokazuje, jak to będzie widziane ze strony klasy scooter
     private Set<Scooter> scooters;
 
     public Long getId() {

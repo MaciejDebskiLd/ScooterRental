@@ -13,9 +13,9 @@ public class Scooter {
     private Long id;
     private String modelName;
     private Integer maxSpeed;
-    private BigDecimal rentalPrice;
+    private BigDecimal rentalPrice; //do obliczeń pieniędzy BigDecimal - inaczej złe zaokrąglenia
 
-    @JsonIgnore
+    @JsonIgnore//żeby nie było zagnieżdżeń w zagnieżdżeniach
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "scooter_dock_id")
     private ScooterDock scooterDock;
