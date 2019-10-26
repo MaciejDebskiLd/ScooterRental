@@ -6,11 +6,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource("classpath:message.properties")
-//@ComponentScan(basePackages = {"com.example.scooterrental.controller"},
-// com.example.scooterrental.common,
-// com.example.scooterrental.repository,
-// com.example.scooterrental.model)
+@PropertySource(value = "classpath:message.properties", encoding = "UTF-8")
+@ComponentScan(basePackages = {"com.example.scooterrental.controller",
+ "com.example.scooterrental.common",
+ "com.example.scooterrental.repository",
+ "com.example.scooterrental.model",
+"com.example.scooterrental.service"})
 public class ScooterRentalApplication {
 
 	public static void main(String[] args) {
