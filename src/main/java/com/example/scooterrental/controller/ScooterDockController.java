@@ -14,7 +14,7 @@ import java.util.Set;
 public class ScooterDockController {
 
     @GetMapping(value = "/{scooterDockId}/scooters", produces = "application/json")
-    public ResponseEntity<Set<Scooter>> getScootersFromDock(
+    public ResponseEntity<Set<Scooter>> getAllDockScooters(
             @PathVariable Long scooterDockId
     ){
         return null;

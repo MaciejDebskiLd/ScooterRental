@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MsgSource {
-    public final String OK001;
-    public final String OK002;
-    public final String OK003;
-    public final String OK004;
+
+//    public final String OK001;
+//    public final String OK002;
+//    public final String OK003;
+//    public final String OK004;
 
     public final ConstErrorMsg ERR001;
     public final ConstErrorMsg ERR002;
@@ -39,10 +40,10 @@ public class MsgSource {
             @Value("${common.const.error.msg.err.0012}") String err012MsgValue,
             @Value("${common.const.error.msg.err.0013}") String err013MsgValue
     ){
-        OK001 = ok001MsgValue;
-        OK002 = ok002MsgValue;
-        OK003 = ok003MsgValue;
-        OK004 = ok004MsgValue;
+//        OK001 = ok001MsgValue;
+//        OK002 = ok002MsgValue;
+//        OK003 = ok003MsgValue;
+//        OK004 = ok004MsgValue;
 
         ERR001 = new ConstErrorMsg("Err001", err001MsgValue);
         ERR002 = new ConstErrorMsg("Err002", err002MsgValue);
