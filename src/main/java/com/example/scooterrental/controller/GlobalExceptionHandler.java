@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    BasicResponse handleBadREquestException(CommonBadRequestException exception){
+    BasicResponse handleBadRequestException(CommonBadRequestException exception){
         return BasicResponse.ofError(
                 exception.getConstErrorMsg().getErrorCode(),
                 exception.getConstErrorMsg().getErrorMsg()
