@@ -20,12 +20,12 @@ public class RentalController {
     public ResponseEntity<BasicResponse> rentScooter(
             @PathVariable Long scooterId,
             @RequestParam Long accountId
-    ){
+    ) {
         return rentalService.rentScooter(scooterId, accountId);
     }
 
-    @PutMapping(value = "/{scooterId}/return")
-    public ResponseEntity<BasicResponse> returnScooter(@PathVariable Long scooterId, @RequestParam Long scooterDockId){
-        return rentalService.returnScooter(scooterId, scooterDockId) ;
+    @PutMapping(value = "/{scooterId}/return", produces = "application/json")
+    public ResponseEntity<BasicResponse> returnScooter(@PathVariable Long scooterId, @RequestParam Long scooterDockId) {
+        return rentalService.returnScooter(scooterId, scooterDockId);
     }
 }
