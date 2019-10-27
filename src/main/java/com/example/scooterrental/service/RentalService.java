@@ -7,4 +7,6 @@ public interface RentalService {
 
     ResponseEntity<BasicResponse> rentScooter(Long scooterId, Long accountId);
 
+    ResponseEntity<BasicResponse> returnScooter(Long scooterId, Long accountId);
+
 }

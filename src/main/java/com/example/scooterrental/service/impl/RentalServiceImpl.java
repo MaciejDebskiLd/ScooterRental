@@ -4,7 +4,9 @@ import com.example.scooterrental.api.BasicResponse;
 import com.example.scooterrental.common.MsgSource;
 import com.example.scooterrental.exception.CommonConflictException;
 import com.example.scooterrental.model.Scooter;
+import com.example.scooterrental.model.ScooterDock;
 import com.example.scooterrental.model.UserAccount;
+import com.example.scooterrental.repository.ScooterDockRepository;
 import com.example.scooterrental.repository.ScooterRepository;
 import com.example.scooterrental.repository.UserAccountRepository;
 import com.example.scooterrental.service.AbstractCommonService;
@@ -21,11 +23,19 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
 
     private UserAccountRepository userAccountRepository;
     private ScooterRepository scooterRepository;
+    private ScooterDockRepository scooterDockRepository;
 
     public RentalServiceImpl(MsgSource msgSource, UserAccountRepository userAccountRepository, ScooterRepository scooterRepository) {
         super(msgSource);
         this.userAccountRepository = userAccountRepository;
         this.scooterRepository = scooterRepository;
+    }
+
+    public RentalServiceImpl(MsgSource msgSource, UserAccountRepository userAccountRepository, ScooterRepository scooterRepository, ScooterDockRepository scooterDockRepository) {
+        super(msgSource);
+        this.userAccountRepository = userAccountRepository;
+        this.scooterRepository = scooterRepository;
+        this.scooterDockRepository = scooterDockRepository;
     }
 
     @Override
@@ -75,5 +85,47 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
         scooter.setScooterDock(null);
         scooter.setUserAccount(userAccount);
         scooterRepository.save(scooter);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<BasicResponse> returnScooter(Long scooterId, Long scooterDockId){
+        Scooter scooter = extractScooterFromRepository(scooterId);
+        checkScooterIsOccupied(scooter);
+        ScooterDock scooterDock = extractScooterDockFromRepository(scooterDockId);
+        checkForFreeSpaceInDock(scooterDock);
+        UserAccount userAccount = extractUserAccountFromRepository(scooter.getUserAccount().getId());
+        finalizeScooterReturn(userAccount, scooter, scooterDock);
+        return ResponseEntity.ok(BasicResponse.of(msgSource.OK005));
+
+    }
+
+    private void checkScooterIsOccupied(Scooter scooter){
+        if(scooter.getScooterDock() != null || scooter.getUserAccount() == null){
+            throw new CommonConflictException(msgSource.ERR014);
+        }
+    }
+
+    private ScooterDock extractScooterDockFromRepository(Long scooterDockId){
+        Optional<ScooterDock> optionalScooterDock = scooterDockRepository.findById(scooterDockId);
+        if (!optionalScooterDock.isPresent()){
+            throw new CommonConflictException(msgSource.ERR008);
+        } return optionalScooterDock.get();
+    }
+
+    private void checkForFreeSpaceInDock(ScooterDock scooterDock){
+        if(scooterDock.getScooters().size()>=scooterDock.getAvailablePlace()){
+            throw new CommonConflictException(msgSource.ERR009);
+        }
+    }
+
+    private void finalizeScooterReturn(UserAccount userAccount, Scooter scooter, ScooterDock scooterDock){
+        scooter.setUserAccount(null);
+        scooter.setScooterDock(scooterDock);
+        userAccount.setScooter(null);
+        userAccountRepository.save(userAccount);
+        scooterDockRepository.save(scooterDock);
+        scooterRepository.save(scooter);
+
     }
 }

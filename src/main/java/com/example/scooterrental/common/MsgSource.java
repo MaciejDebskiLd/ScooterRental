@@ -10,6 +10,7 @@ public class MsgSource {
     public final String OK002;
     public final String OK003;
     public final String OK004;
+    public final String OK005;
 
     public final ConstErrorMsg ERR001;
     public final ConstErrorMsg ERR002;
@@ -24,12 +25,14 @@ public class MsgSource {
     public final ConstErrorMsg ERR011;
     public final ConstErrorMsg ERR012;
     public final ConstErrorMsg ERR013;
+    public final ConstErrorMsg ERR014;
 
     public MsgSource(
             @Value("${common.ok.msg.ok001}") String ok001MsgValue,
             @Value("${common.ok.msg.ok002}") String ok002MsgValue,
             @Value("${common.ok.msg.ok003}") String ok003MsgValue,
             @Value("${common.ok.msg.ok004}") String ok004MsgValue,
+            @Value("${common.ok.msg.ok005}") String ok005MsgValue,
 
             @Value("${common.const.error.msg.err001}") String err001MsgValue,
             @Value("${common.const.error.msg.err002}") String err002MsgValue,
@@ -43,12 +46,14 @@ public class MsgSource {
             @Value("${common.const.error.msg.err010}") String err010MsgValue,
             @Value("${common.const.error.msg.err011}") String err011MsgValue,
             @Value("${common.const.error.msg.err012}") String err012MsgValue,
-            @Value("${common.const.error.msg.err013}") String err013MsgValue
+            @Value("${common.const.error.msg.err013}") String err013MsgValue,
+            @Value("${common.const.error.msg.err014}") String err014MsgValue
     ) {
         OK001 = ok001MsgValue;
         OK002 = ok002MsgValue;
         OK003 = ok003MsgValue;
         OK004 = ok004MsgValue;
+        OK005 = ok005MsgValue;
 
         ERR001 = new ConstErrorMsg("Err001", err001MsgValue);
         ERR002 = new ConstErrorMsg("Err002", err002MsgValue);
@@ -63,6 +68,7 @@ public class MsgSource {
         ERR011 = new ConstErrorMsg("Err011", err011MsgValue);
         ERR012 = new ConstErrorMsg("Err012", err012MsgValue);
         ERR013 = new ConstErrorMsg("Err013", err013MsgValue);
+        ERR014 = new ConstErrorMsg("Err014", err014MsgValue);
 
     }
 
