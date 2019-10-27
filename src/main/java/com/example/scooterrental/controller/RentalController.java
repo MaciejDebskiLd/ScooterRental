@@ -15,11 +15,17 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
+
     @PutMapping(value = "/{scooterId}/scooter", produces = "application/json")
-    public ResponseEntity<BasicResponse> createUserAccount(
+    public ResponseEntity<BasicResponse> rentScooter(
             @PathVariable Long scooterId,
             @RequestParam Long accountId
     ){
         return rentalService.rentScooter(scooterId, accountId);
+    }
+
+    @PutMapping(value = "/{scooterId}/return")
+    public ResponseEntity<BasicResponse> returnScooter(@PathVariable Long scooterId, @RequestParam Long scooterDockId){
+        return rentalService.returnScooter(scooterId, scooterDockId) ;
     }
 }

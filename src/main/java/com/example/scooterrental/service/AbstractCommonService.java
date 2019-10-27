@@ -6,7 +6,11 @@ public abstract class AbstractCommonService {
 
     protected MsgSource msgSource;
 
+    public AbstractCommonService() {
+    }
+
     public AbstractCommonService(MsgSource msgSource) {
         this.msgSource = msgSource;
     }
+
 }

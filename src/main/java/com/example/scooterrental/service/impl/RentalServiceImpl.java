@@ -25,6 +25,10 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
     private ScooterRepository scooterRepository;
     private ScooterDockRepository scooterDockRepository;
 
+    public RentalServiceImpl() {
+        super();
+    }
+
     public RentalServiceImpl(MsgSource msgSource, UserAccountRepository userAccountRepository, ScooterRepository scooterRepository) {
         super(msgSource);
         this.userAccountRepository = userAccountRepository;
@@ -122,9 +126,9 @@ public class RentalServiceImpl extends AbstractCommonService implements RentalSe
     private void finalizeScooterReturn(UserAccount userAccount, Scooter scooter, ScooterDock scooterDock){
         scooter.setUserAccount(null);
         scooter.setScooterDock(scooterDock);
-        userAccount.setScooter(null);
-        userAccountRepository.save(userAccount);
-        scooterDockRepository.save(scooterDock);
+//        userAccount.setScooter(null);
+//        userAccountRepository.save(userAccount);
+//        scooterDockRepository.save(scooterDock);
         scooterRepository.save(scooter);
 
     }
