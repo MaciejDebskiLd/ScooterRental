@@ -53,7 +53,7 @@ public class ScooterDockControllerTest {
     }
 
     @ Test
-    public void ifGetScootersRequestContainsDockIdWhichNotExistShoulReturnHttpCode409AndError() throws Exception{
+    public void ifGetScootersRequestContainsDockIdWhichNotExistShouldReturnHttpCode409AndError() throws Exception{
         mockMvc
                 .perform(get("/scooter-dock/{scooterDockId}/scooters", 9999))
                 .andExpect(status().is(409))

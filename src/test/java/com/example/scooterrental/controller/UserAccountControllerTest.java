@@ -102,7 +102,7 @@ public class UserAccountControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().is(200))
-                .andExpect(content().string(Matchers.containsString("Poprawnie utworzono konto użytkownika.")))
+                .andExpect(content().string(Matchers.containsString("Poprawnie utworzono konto uzytkownika.")))
                 .andExpect(content().string(Matchers.containsString("accountId")))
                 .andReturn();
 
@@ -145,7 +145,7 @@ public class UserAccountControllerTest {
                 .andExpect(content().json(
                         "{\n" +
                                 "\t\"errorCode\": \"Err004\",\n" +
-                                "\t\"errorMsg\": \"Konto o podanym adresie e-mail już istnieje.\",\n" +
+                                "\t\"errorMsg\": \"Konto o podanym adresie e-mail juz istnieje.\",\n" +
                                 "\t\"status\": \"ERROR\"\n" +
                                 "}"
                 ));

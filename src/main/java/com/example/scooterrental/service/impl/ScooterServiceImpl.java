@@ -51,7 +51,7 @@ public class ScooterServiceImpl extends AbstractCommonService implements Scooter
             throw new CommonBadRequestException(msgSource.ERR001);
         }
         if (isIncorrectMaxSpeed(request.getMaxSpeed())){
-            throw new CommonConflictException(msgSource.ERR007);
+            throw new CommonBadRequestException(msgSource.ERR007);
         }
     }
 

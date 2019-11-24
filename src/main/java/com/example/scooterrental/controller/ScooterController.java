@@ -17,7 +17,7 @@ public class ScooterController {
         this.scooterService = scooterService;
     }
 
-    @PostMapping(value = "/add", produces = "application/json")
+    @PostMapping(value = "/add", produces = "application/json;charset=UTF-8")
     public ResponseEntity<AddScooterResponse> addScooter(
             @RequestBody AddScooterRequest request
     ){

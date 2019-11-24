@@ -23,4 +23,4 @@ insert into public.user_account(id, balance, create_date, owner_age, owner_email
 (18, 0,'2019-07-08', 32, 'pati22@gazeta.pl.com', 'pati22');
 
 
-SELECT setval('public.hibernate_sequence', 19, true);
+SELECT setval('public.hibernate_sequence', 18, true);
