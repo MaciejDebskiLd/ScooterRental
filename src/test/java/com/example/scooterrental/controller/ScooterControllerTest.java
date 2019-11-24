@@ -84,7 +84,7 @@ public class ScooterControllerTest {
                 .andExpect(content().json(
                         "{\n" +
                                 "\t\"errorCode\": \"Err007\",\n" +
-                                "\t\"errorMsg\": \"Maksymalna predkosc hulajnogi powinna miescic sie w zakresie od 1 do 40.\",\n" +
+                                "\t\"errorMsg\": \"Maksymalna predkość hulajnogi powinna mieścić się w zakresie od 1 do 40.\",\n" +
                                 "\t\"status\": \"ERROR\"\n" +
                                 "}"
                         )
