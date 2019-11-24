@@ -1,5 +1,6 @@
 package com.example.scooterrental.controller;
 
+import com.example.scooterrental.api.BasicResponse;
 import com.example.scooterrental.api.request.AddScooterRequest;
 import com.example.scooterrental.api.response.AddScooterResponse;
 import com.example.scooterrental.service.ScooterService;
@@ -21,6 +22,13 @@ public class ScooterController {
             @RequestBody AddScooterRequest request
     ){
         return scooterService.addScooter(request);
+    }
+
+    @PutMapping(value = "/{scooterId}/undock", produces = "application/json")
+    public ResponseEntity<BasicResponse> undockScooter(
+            @PathVariable Long scooterId
+    ) {
+        return scooterService.undockScooter(scooterId);
     }
 }
 

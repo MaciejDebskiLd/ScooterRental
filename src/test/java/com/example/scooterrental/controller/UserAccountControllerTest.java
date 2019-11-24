@@ -60,19 +60,20 @@ public class UserAccountControllerTest {
                 )
                 .andDo(MockMvcResultHandlers.print());
     }
+
     @Test
-    public void ifCreateAccountRequestContainsWrongAgeShouldReturnHttpCode400AndErrorMsg() throws Exception{
+    public void ifCreateAccountRequestContainsWrongAgeShouldReturnHttpCode400AndErrorMsg() throws Exception {
         mockMvc
                 .perform(
                         post("/user-account/create")
-                        .content(
-                                "{\n" +
-                                        "\t\"ownerUsername\": \"janek222\",\n" +
-                                        "\t\"ownerEmail\": \"jan.kowalski@gmail.com\",\n" +
-                                        "\t\"ownerAge\": 123\n" +
-                                        "}"
-                        )
-                        .contentType(MediaType.APPLICATION_JSON)
+                                .content(
+                                        "{\n" +
+                                                "\t\"ownerUsername\": \"janek222\",\n" +
+                                                "\t\"ownerEmail\": \"jan.kowalski@gmail.com\",\n" +
+                                                "\t\"ownerAge\": 123\n" +
+                                                "}"
+                                )
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().is(400))
                 .andExpect(content().json(
@@ -87,21 +88,21 @@ public class UserAccountControllerTest {
     }
 
     @Test
-    public void ifCreateAccountRequestContainsCorrectDataShouldReturnHttpCode200AndCreateAccount() throws Exception{
+    public void ifCreateAccountRequestContainsCorrectDataShouldReturnHttpCode200AndCreateAccount() throws Exception {
         MvcResult mvcResult = mockMvc
                 .perform(
                         post("/user-account/create")
-                        .content(
-                                "{\n" +
-                                        "\t\"ownerUsername\": \"janek222\",\n" +
-                                        "\t\"ownerEmail\": \"jan.kowalski@gmail.com\",\n" +
-                                        "\t\"ownerAge\": 78\n" +
-                                        "}"
-                        )
-                        .contentType(MediaType.APPLICATION_JSON)
+                                .content(
+                                        "{\n" +
+                                                "\t\"ownerUsername\": \"janek2222\",\n" +
+                                                "\t\"ownerEmail\": \"jan.kowalski2@gmail.com\",\n" +
+                                                "\t\"ownerAge\": 78\n" +
+                                                "}"
+                                )
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().is(200))
-                .andExpect(content().string(Matchers.containsString("Poprawnie utworzono konto uzytkownika.")))
+                .andExpect(content().string(Matchers.containsString("Poprawnie utworzono konto użytkownika.")))
                 .andExpect(content().string(Matchers.containsString("accountId")))
                 .andReturn();
 
@@ -110,8 +111,8 @@ public class UserAccountControllerTest {
                 mvcResult.getResponse().getContentAsString(),
                 CreateUserAccountResponse.class
         );
-//        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(response.getAccountId());
-//        Assert.assertTrue(optionalUserAccount.isPresent());
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(response.getAccountId());
+        Assert.assertTrue(optionalUserAccount.isPresent());
     }
 
     @Test

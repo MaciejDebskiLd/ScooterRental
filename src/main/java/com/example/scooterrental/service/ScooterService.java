@@ -1,5 +1,6 @@
 package com.example.scooterrental.service;
 
+import com.example.scooterrental.api.BasicResponse;
 import com.example.scooterrental.api.request.AddScooterRequest;
 import com.example.scooterrental.api.response.AddScooterResponse;
 import org.springframework.http.ResponseEntity;
@@ -7,4 +8,5 @@ import org.springframework.http.ResponseEntity;
 public interface ScooterService {
 
     ResponseEntity<AddScooterResponse> addScooter(AddScooterRequest request);
+    ResponseEntity<BasicResponse> undockScooter(Long scooterId);
 }

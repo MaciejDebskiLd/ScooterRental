@@ -1,5 +1,6 @@
 package com.example.scooterrental.service.impl;
 
+import com.example.scooterrental.api.BasicResponse;
 import com.example.scooterrental.api.request.AddScooterRequest;
 import com.example.scooterrental.api.response.AddScooterResponse;
 import com.example.scooterrental.common.MsgSource;
@@ -76,5 +77,27 @@ public class ScooterServiceImpl extends AbstractCommonService implements Scooter
         scooter.setScooterDock(scooterDock);
 
         return scooterRepository.save(scooter);
+    }
+    @Override
+    @Transactional
+    public ResponseEntity<BasicResponse> undockScooter(Long scooterId) {
+        Scooter scooter = extractScooterFromRepository(scooterId);
+        checkScooterIsRented(scooter);
+        scooter.setScooterDock(null);
+        scooterRepository.save(scooter);
+        return ResponseEntity.ok(BasicResponse.of(msgSource.OK010));
+    }
+    private Scooter extractScooterFromRepository(Long scooterId) {
+        Optional<Scooter> optionalScooter = scooterRepository.findById(scooterId);
+        if (!optionalScooter.isPresent()) {
+            throw new CommonConflictException(msgSource.ERR010);
+        }
+        return optionalScooter.get();
+    }
+
+    private void checkScooterIsRented(Scooter scooter) {
+        if (scooter.getUserAccount() != null) {
+            throw new CommonConflictException(msgSource.ERR015);
+        }
     }
 }
